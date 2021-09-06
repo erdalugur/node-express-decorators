@@ -1,7 +1,5 @@
 # Decorator Example With Express Server
 
--- Steps
-
 # Install Dependencies
 - yarn install or npm install
 
