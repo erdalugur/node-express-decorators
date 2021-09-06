@@ -3,7 +3,7 @@
 -- Steps
 
 # Install Dependencies
-- (yarn install) or (npm install)
+- yarn install or npm install
 
 # Run for Prod Mode
 - yarn start or npm start
