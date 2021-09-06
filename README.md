@@ -3,9 +3,9 @@
 # Install Dependencies
 - yarn install or npm install
 
-# Run for Prod Mode
+# Run For Prod Mode
 - yarn start or npm start
 
-# Run for Development Mode
+# Run For Development Mode
 - yarn dev or npm run dev
 
