@@ -28,3 +28,7 @@ export class AppServer {
   routes: Array<{ object: any, prefix?: string }>
   app: express.Application
 }
+export interface ContainerProvider {
+  useValue: any;
+  token: string;
+}

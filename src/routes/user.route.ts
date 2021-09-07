@@ -1,11 +1,14 @@
 import { Request, Response } from "express";
-import { Route, Get, Post, Put, Delete, Options } from "../base";
+import { Route, Get, Post, Put, Delete, Options, Inject } from "../base";
+import { UserRepository } from "../repository";
 
 @Route('/user')
 export class UserRoute {
+  @Inject('userRepository') private user:UserRepository
+
   @Get('/')
   get (req: Request, res: Response) {
-    res.send('hello user request :))')
+    res.send(this.user.getFullName())
   }
 
   @Get('/:id')

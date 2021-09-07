@@ -1,7 +1,7 @@
 import * as express from 'express'
-import { HttpMethods } from '.';
 import { META_KEYS } from './constants';
-import { RouteDefinition, MethodDefinition, RootModuleOptions } from './types'
+import { container } from './container';
+import { RouteDefinition, MethodDefinition, RootModuleOptions, HttpMethods } from './types'
 
 export function Route (prefix: string = ''): ClassDecorator {
   return (target: any) => {
@@ -73,3 +73,21 @@ export function Delete (path: string): MethodDecorator {
 export function Options (path: string): MethodDecorator {
   return makeRouteMethod({ method: HttpMethods.OPTIONS, path: path})
 };
+
+
+export function Injectable (token: string): Function {
+  return (target: { new () }) => {
+    const instance = new target()
+    container.provide({ token, useValue: instance })
+  }
+}
+
+export function Inject(token: string) {
+  return function(target: any, key: string) {
+    Object.defineProperty(target, key, {
+      get: () => container.resolve(token),
+      enumerable: true,
+      configurable: true
+    });
+  };
+}
