@@ -1,5 +1,5 @@
 import 'reflect-metadata';
-import { RootModule, AppServer } from './decorators';
+import { RootModule, AppServer } from './base';
 import { Index, UserRoute } from './routes';
 @RootModule({
   port: 3000,

@@ -1,5 +1,4 @@
 import * as express from 'express'
-
 import { HttpMethods } from '.';
 import { META_KEYS } from './constants';
 import { RouteDefinition, MethodDefinition, RootModuleOptions } from './types'

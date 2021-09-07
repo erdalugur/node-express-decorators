@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Route, Get, Post, Put, Delete, Options } from "../decorators";
+import { Route, Get, Post, Put, Delete, Options } from "../base";
 
 @Route('/user')
 export class UserRoute {
