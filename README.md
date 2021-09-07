@@ -1,4 +1,7 @@
-# This repo includes http methods decorators and dependency injection decorators
+This repo includes 
+- http methods decorators 
+- dependency injection decorators
+
 
 Install Dependencies
 - yarn install or npm install
