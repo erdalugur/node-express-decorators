@@ -1,6 +1,8 @@
+import * as express from 'express'
+
 import { HttpMethods } from '.';
 import { META_KEYS } from './constants';
-import { RouteDefinition, MethodDefinition } from './types'
+import { RouteDefinition, MethodDefinition, RootModuleOptions } from './types'
 
 export function Route (prefix: string = ''): ClassDecorator {
   return (target: any) => {
@@ -11,6 +13,30 @@ export function Route (prefix: string = ''): ClassDecorator {
     }
   };
 };
+
+export function RootModule (options: RootModuleOptions) {
+  return function (target: Function) { 
+    const app = express()
+    options.routes.forEach(route => {
+      const instance                       = new route.object();
+
+      const prefix: string                 = Reflect.getMetadata(META_KEYS.PREFIX, route.object) || route.prefix
+      
+      const routes: Array<RouteDefinition> = Reflect.getMetadata(META_KEYS.ROUTES, route.object)
+      if (!prefix) {
+        console.error('prefix is required on your route')
+      }
+      routes.forEach(route => {
+        app[route.requestMethod](prefix + route.path, (req: express.Request, res: express.Response, next: express.NextFunction) => {
+          instance[route.methodName](req, res, next)
+        })
+      })
+    })
+    target.prototype.app = app
+    target.prototype.routes = options.routes
+    target.prototype.port = options.port
+  }
+}
 
 function makeRouteMethod (options: MethodDefinition) {
   return (target, propertyKey: string): void => {
