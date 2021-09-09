@@ -1,4 +1,4 @@
-import { Injectable } from "../base";
+import { Injectable } from "../decorators";
 
 @Injectable("userRepository")
 export class UserRepository {

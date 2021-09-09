@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { Route, Get, Post, Put, Delete, Options, Inject } from "../base";
+import { Route, Get, Post, Put, Delete, Options, Inject } from "../decorators";
 import { UserRepository } from "../repository";
 
 @Route('/user')

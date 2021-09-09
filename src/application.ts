@@ -1,12 +1,16 @@
 import 'reflect-metadata';
-import { RootModule, AppServer } from './base';
+import { AppModule } from './decorators';
 import { Index, UserRoute } from './routes';
-@RootModule({
+import { AppServer } from './types';
+@AppModule({
   port: 3000,
   routes: [
     { object: Index},
     { object: UserRoute }
-  ]
+  ],
+  bodyParserOptions: {
+    limit: "100mb"
+  }
 })
 export class Application extends AppServer {
   constructor() { 

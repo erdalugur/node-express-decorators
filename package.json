@@ -1,13 +1,16 @@
 {
   "name": "decorator-example",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "dist/index.js",
   "author": "Uğur Erdal",
   "description": "Typescript decorators created and used with express server",
   "license": "MIT",
+  "lib": "dist/index.js",
   "scripts": {
     "dev": "nodemon --watch src --exec 'ts-node' ./src/index.ts",
-    "start": "ts-node src/index.ts"
+    "start": "ts-node src/index.ts",
+    "build": "tsc",
+    "serve": "yarn build && node dist/index.js"
   },
   "dependencies": {
     "express": "^4.17.1",
