@@ -4,11 +4,11 @@ import { UserRepository } from "../repository";
 
 @Route('/user')
 export class UserRoute {
-  @Inject('userRepository') private user:UserRepository
+  @Inject() private userRepository: UserRepository
 
   @Get('/')
   get (req: Request, res: Response) {
-    res.send(this.user.getFullName())
+    res.send(this.userRepository.getFullName())
   }
 
   @Get('/:id')

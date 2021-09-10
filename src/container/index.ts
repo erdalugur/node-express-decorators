@@ -18,6 +18,17 @@ export class Container {
   public provide(details: ContainerProvider): void {
     this._providers.set(details.token, details.useValue)
   }
+
+  public has (token: string): boolean {
+    return this._providers.has(token)
+  }
+
+  public delete (token: string): boolean {
+    return this._providers.delete(token)
+  }
+  public clear () {
+    this._providers.clear()
+  }
 }
 
 export const container = new Container();

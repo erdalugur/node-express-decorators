@@ -1,6 +1,6 @@
 import { Injectable } from "../decorators";
 
-@Injectable("userRepository")
+@Injectable()
 export class UserRepository {
   name: string = "ugur"
   surname: string = "erdal"

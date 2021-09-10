@@ -2,12 +2,12 @@ import * as express from 'express'
 import { META_KEYS } from '../constants';
 import { RouteDefinition, AppModuleOptions } from '../types'
 
-export const expresInstance = express()
+export const expressInstance = express()
 
 export function Route (prefix: string = ''): ClassDecorator {
   return (target: any) => {
+    prefix = prefix ? prefix : target.name
     Reflect.defineMetadata(META_KEYS.PREFIX, prefix, target);
-
     if (! Reflect.hasMetadata(META_KEYS.ROUTES, target)) {
       Reflect.defineMetadata(META_KEYS.ROUTES, [], target);
     }
@@ -17,7 +17,7 @@ export function Route (prefix: string = ''): ClassDecorator {
 export function AppModule (options: AppModuleOptions): ClassDecorator {
   return function (target: Function) { 
     if(options.bodyParserOptions)
-      expresInstance.use(express.json(options.bodyParserOptions))
+      expressInstance.use(express.json(options.bodyParserOptions))
     
     options.routes.forEach(route => {
       const instance = new route.object();
@@ -28,12 +28,12 @@ export function AppModule (options: AppModuleOptions): ClassDecorator {
         console.error('prefix is required on your route')
       }
       routes.forEach(route => {
-        expresInstance[route.requestMethod](prefix + route.path, (req: express.Request, res: express.Response, next: express.NextFunction) => {
+        expressInstance[route.requestMethod](prefix + route.path, (req: express.Request, res: express.Response, next: express.NextFunction) => {
           instance[route.methodName](req, res, next)
         })
       })
     })
-    target.prototype.app = expresInstance
+    target.prototype.app = expressInstance
     target.prototype.routes = options.routes
     target.prototype.port = options.port
   }
