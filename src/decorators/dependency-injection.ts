@@ -1,20 +1,10 @@
-import { container } from '../container';
-
-export function Injectable (token?: string): Function {
-  return (target: { new () }) => {
-    const instance = new target()
-    token = token ? token : target.name.charAt(0).toLowerCase() + target.name.slice(1, target.name.length) 
-    container.provide({ token, useValue: instance })
+export const Injector = new class {
+  // resolving instances
+  resolve<T>(target: any): T {
+    // tokens are required dependencies, while injections are resolved tokens from the Injector
+    let tokens = Reflect.getMetadata('design:paramtypes', target) || [],
+        injections = tokens.filter(x => x !== undefined).map(token => Injector.resolve<any>(token));
+    
+    return new target(...injections);
   }
-}
-
-export function Inject (token?: string) {
-  return function(target: any, properyKey: string) {
-    let key = token || properyKey
-    Object.defineProperty(target, properyKey, {
-      get: () => container.resolve<any>(key),
-      enumerable: true,
-      configurable: true
-    });
-  };
 }

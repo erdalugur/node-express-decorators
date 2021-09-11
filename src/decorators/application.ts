@@ -1,4 +1,5 @@
 import * as express from 'express'
+import { Injector } from './dependency-injection';
 import { META_KEYS } from '../constants';
 import { RouteDefinition, AppModuleOptions } from '../types'
 import { resolveApp, getAllFiles } from '../utils'
@@ -27,7 +28,7 @@ export function AppModule (options: AppModuleOptions): ClassDecorator {
       // clean the file extension
       filePath = filePath.split(".")[0]
       const object = require(filePath).default
-      const instance = new object()
+      const instance = Injector.resolve<any>(object)
       const routes: Array<RouteDefinition> = Reflect.getMetadata(META_KEYS.ROUTES, object) || []
       routes.forEach(route => {
         const prefix = Reflect.getMetadata(META_KEYS.PREFIX, object) || filePath.slice(filePath.lastIndexOf("/"))
