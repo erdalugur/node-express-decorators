@@ -1,6 +1,6 @@
 This repo includes 
 - http methods decorators 
-- dependency injection decorators
+- auto assign dependency injection
 
 
 Install Dependencies
