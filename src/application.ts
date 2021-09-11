@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { AppModule } from './decorators';
-
 import { AppServer } from './types';
+
 @AppModule({
   port: 3000,
   bodyParserOptions: {
