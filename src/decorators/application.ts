@@ -1,6 +1,7 @@
 import * as express from 'express'
 import { META_KEYS } from '../constants';
 import { RouteDefinition, AppModuleOptions } from '../types'
+import { resolveApp, getAllFiles } from '../utils'
 
 export const expressInstance = express()
 
@@ -19,22 +20,24 @@ export function AppModule (options: AppModuleOptions): ClassDecorator {
     if(options.bodyParserOptions)
       expressInstance.use(express.json(options.bodyParserOptions))
     
-    options.routes.forEach(route => {
-      const instance = new route.object();
-      const prefix: string = Reflect.getMetadata(META_KEYS.PREFIX, route.object) || route.prefix
-      const routes: Array<RouteDefinition> = Reflect.getMetadata(META_KEYS.ROUTES, route.object)
+    const routesPath = resolveApp("../routes")
+    const names = getAllFiles(routesPath, [])
 
-      if (!prefix) {
-        console.error('prefix is required on your route')
-      }
+    names.forEach(filePath => {
+      // clean the file extension
+      filePath = filePath.split(".")[0]
+      const object = require(filePath).default
+      const instance = new object()
+      const routes: Array<RouteDefinition> = Reflect.getMetadata(META_KEYS.ROUTES, object) || []
       routes.forEach(route => {
-        expressInstance[route.requestMethod](prefix + route.path, (req: express.Request, res: express.Response, next: express.NextFunction) => {
+        const prefix = Reflect.getMetadata(META_KEYS.PREFIX, object) || filePath.slice(filePath.lastIndexOf("/"))
+        const path = prefix + route.path
+        expressInstance[route.requestMethod](path, (req: express.Request, res: express.Response, next: express.NextFunction) => {
           instance[route.methodName](req, res, next)
         })
       })
     })
     target.prototype.app = expressInstance
-    target.prototype.routes = options.routes
     target.prototype.port = options.port
   }
 }

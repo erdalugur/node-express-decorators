@@ -6,11 +6,15 @@ export class Container {
     this._providers = new Map()
   }
 
-  public resolve<T>(token: string): T {
+  public resolve<T>(token: string): T
+  public resolve<T>(token: string, defaultValue?: T): T
+  public resolve<T>(token: string, defaultValue?: T): T {
     const matchedProvider = this._providers.get(token)
     if (matchedProvider) {
       return matchedProvider as T;
     } else {
+       if (defaultValue) 
+        return defaultValue as T
       throw new Error(`No provider found for ${token}!`);
     }
   }

@@ -3,7 +3,7 @@ import { Route, Get, Post, Put, Delete, Options, Inject } from "../decorators";
 import { UserRepository } from "../repository";
 
 @Route('/user')
-export class UserRoute {
+export default class UserRoute {
   @Inject() private userRepository: UserRepository
 
   @Get('/')

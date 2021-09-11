@@ -30,7 +30,6 @@ export interface BodyParserOptions {
 export interface RouteItem { object: any, prefix?: string }
 export interface AppModuleOptions {
   port: number
-  routes: Array<RouteItem>
   bodyParserOptions?: BodyParserOptions
 }
 
