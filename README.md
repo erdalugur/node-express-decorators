@@ -7,7 +7,9 @@ This repo includes
     - Options
 - Auto assign dependency injection
 - Central error handling
-
+- Dynamic Routing
+    - Files with .ts or .js extension added to the routes folder are saved as routes.
+   
 Install Dependencies
 - yarn install or npm install
 
