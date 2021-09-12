@@ -1,5 +1,6 @@
 import 'reflect-metadata';
 import { AppModule } from './decorators';
+import { HttpException } from './exceptions';
 import { AppServer } from './types';
 
 @AppModule({
@@ -19,3 +20,14 @@ export class Application extends AppServer {
     })
   }
 }
+
+process.on('unhandledRejection', error => {
+  console.log("unhandledRejection")
+  throw error
+})
+
+process.on('uncaughtException', (error: HttpException) => {
+  if (!error.trustedException) {
+    process.exit(1)
+  }
+})

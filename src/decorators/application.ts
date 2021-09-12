@@ -3,6 +3,7 @@ import { Injector } from './dependency-injection';
 import { META_KEYS } from '../constants';
 import { RouteDefinition, AppModuleOptions } from '../types'
 import { resolveApp, getAllFiles } from '../utils'
+import { errorHandler, errorWrapper, logError } from '../middeware';
 
 export const expressInstance = express()
 
@@ -33,9 +34,11 @@ export function AppModule (options: AppModuleOptions): ClassDecorator {
       routes.forEach(route => {
         const prefix = Reflect.getMetadata(META_KEYS.PREFIX, object) || filePath.slice(filePath.lastIndexOf("/"))
         const path = prefix + route.path
-        expressInstance[route.requestMethod](path, (req: express.Request, res: express.Response, next: express.NextFunction) => {
+        expressInstance[route.requestMethod](path, errorWrapper(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
           instance[route.methodName](req, res, next)
-        })
+        }))
+        expressInstance.use(logError)
+        expressInstance.use(errorHandler)
       })
     })
     target.prototype.app = expressInstance

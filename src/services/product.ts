@@ -1,4 +1,4 @@
-export class ProductRepository {
+export class ProductService {
   private items: string[] = ["apple", "orange"]
 
   public getAll() {

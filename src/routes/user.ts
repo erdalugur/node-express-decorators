@@ -1,22 +1,24 @@
 import { Request, Response } from "express";
 import { Route, Get, Post, Put, Delete, Options } from "../decorators";
-import { ProductRepository, UserRepository } from "../repository";
+import { ProductService, UserService, LoggerService } from "../services";
 
 @Route('/user')
 export default class UserRoute {
   constructor(
-    private userRepository: UserRepository, 
-    private productRepository: ProductRepository 
+    private userService: UserService, 
+    private productService: ProductService,
+    private loggerService: LoggerService
     ) {}
 
   @Get('/')
   get (req: Request, res: Response) {
-    res.send(this.userRepository.getFullName())
+    this.loggerService.log("yeop", "deneme", "asdasd")
+    res.send(this.userService.getFullName())
   }
   
   @Get('/products')
   products (req: Request, res: Response) {
-    res.send(this.productRepository.getAll())
+    res.send(this.productService.getAll())
   }
 
   @Get('/:id')

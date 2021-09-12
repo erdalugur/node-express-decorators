@@ -1,7 +1,12 @@
 This repo includes 
-- http methods decorators 
-- auto assign dependency injection
-
+- Http methods decorators 
+    - Get
+    - Post
+    - Put
+    - Delete
+    - Options
+- Auto assign dependency injection
+- Central error handling
 
 Install Dependencies
 - yarn install or npm install

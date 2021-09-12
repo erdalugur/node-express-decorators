@@ -1,11 +1,6 @@
 import { Application } from 'express'
-export enum HttpMethods { 
-  GET = 'get', 
-  POST = 'post', 
-  DELETE = 'delete', 
-  OPTIONS = 'options', 
-  PUT = 'put' 
-}
+import { HttpMethods } from './http'
+export * from './http'
 
 export interface RouteDefinition {
   path: string
