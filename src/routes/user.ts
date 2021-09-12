@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { Route, Get, Post, Put, Delete, Options } from "../decorators";
-import { ProductService, UserService, loggerService } from "../services";
+import { ProductService, UserService } from "../services";
 
 @Route('/user')
 export default class UserRoute {
@@ -11,7 +11,6 @@ export default class UserRoute {
 
   @Get('/')
   get (req: Request, res: Response) {
-    loggerService.log("yeop", "deneme", "asdasd")
     res.send(this.userService.getFullName())
   }
   
