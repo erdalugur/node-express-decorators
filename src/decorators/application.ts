@@ -38,13 +38,12 @@ export function AppModule (options: AppModuleOptions): ClassDecorator {
           const props = [req, res, next]
           instance[route.methodName](...props)
         }))
-        
       })
     })
-
+    // error handling
     expressInstance.use(logError)
     expressInstance.use(errorHandler)
-
+    
     target.prototype.app = expressInstance
     target.prototype.port = options.port
   }
