@@ -31,10 +31,12 @@ export function AppModule (options: AppModuleOptions): ClassDecorator {
       const object = require(filePath).default
       const instance = Injector.resolve<any>(object)
       const routes: Array<RouteDefinition> = Reflect.getMetadata(META_KEYS.ROUTES, object) || []
+      
       routes.forEach(route => {
         const prefix = Reflect.getMetadata(META_KEYS.PREFIX, object) || filePath.slice(filePath.lastIndexOf("/"))
         const path = prefix + route.path
         expressInstance[route.requestMethod](path, errorWrapper(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
+          
           const props = [req, res, next]
           instance[route.methodName](...props)
         }))
