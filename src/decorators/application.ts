@@ -37,10 +37,12 @@ export function AppModule (options: AppModuleOptions): ClassDecorator {
         expressInstance[route.requestMethod](path, errorWrapper(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
           instance[route.methodName](req, res, next)
         }))
-        expressInstance.use(logError)
-        expressInstance.use(errorHandler)
       })
     })
+    // error handling
+    expressInstance.use(logError)
+    expressInstance.use(errorHandler)
+    
     target.prototype.app = expressInstance
     target.prototype.port = options.port
   }
