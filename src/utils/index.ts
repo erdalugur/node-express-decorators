@@ -1,7 +1,7 @@
 import * as fs from 'fs'
 import * as path from 'path'
 
-export function getAllFiles(dirPath, arrayOfFiles): string[] {
+export function getAllFiles(dirPath: string, arrayOfFiles: string []): string[] {
   let files = fs.readdirSync(dirPath)
 
   arrayOfFiles = arrayOfFiles || []

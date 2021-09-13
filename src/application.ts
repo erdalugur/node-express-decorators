@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 import { AppModule } from './decorators';
 import { HttpException } from './exceptions';
+import { loggerService } from './services';
 import { AppServer } from './types';
 
 @AppModule({
@@ -16,17 +17,18 @@ export class Application extends AppServer {
   
   listen () {
     this.app.listen(this.port, () => {
-      console.log(`application listening on http://localholst:${this.port}`)
+      loggerService.log(`application listening on http://localholst:${this.port}`)
     })
   }
 }
 
 process.on('unhandledRejection', error => {
-  console.log("unhandledRejection")
+  loggerService.log("unhandledRejection", error)
   throw error
 })
 
 process.on('uncaughtException', (error: HttpException) => {
+  loggerService.log("uncaughtException", error)
   if (!error.trustedException) {
     process.exit(1)
   }

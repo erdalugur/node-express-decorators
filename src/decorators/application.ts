@@ -23,9 +23,9 @@ export function AppModule (options: AppModuleOptions): ClassDecorator {
       expressInstance.use(express.json(options.bodyParserOptions))
     
     const routesPath = resolveApp("../routes")
-    const names = getAllFiles(routesPath, [])
+    const routeNames = getAllFiles(routesPath, [])
 
-    names.forEach(filePath => {
+    routeNames.forEach(filePath => {
       // clean the file extension
       filePath = filePath.split(".")[0]
       const object = require(filePath).default
@@ -35,12 +35,16 @@ export function AppModule (options: AppModuleOptions): ClassDecorator {
         const prefix = Reflect.getMetadata(META_KEYS.PREFIX, object) || filePath.slice(filePath.lastIndexOf("/"))
         const path = prefix + route.path
         expressInstance[route.requestMethod](path, errorWrapper(async (req: express.Request, res: express.Response, next: express.NextFunction) => {
-          instance[route.methodName](req, res, next)
+          const props = [req, res, next]
+          instance[route.methodName](...props)
         }))
-        expressInstance.use(logError)
-        expressInstance.use(errorHandler)
+        
       })
     })
+
+    expressInstance.use(logError)
+    expressInstance.use(errorHandler)
+
     target.prototype.app = expressInstance
     target.prototype.port = options.port
   }
