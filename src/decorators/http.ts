@@ -37,3 +37,20 @@ export function Delete (path: string): MethodDecorator {
 export function Options (path: string): MethodDecorator {
   return makeRouteMethod({ method: HttpMethods.OPTIONS, path: path})
 }
+
+function createParameterDecorator (metaKey): ParameterDecorator {
+  return (target, key, index) => {
+    Reflect.defineMetadata(metaKey, index, target, key)
+  }
+}
+
+export const Body = (): ParameterDecorator => createParameterDecorator(META_KEYS.BODY) 
+export const Req = (): ParameterDecorator => createParameterDecorator(META_KEYS.REQUEST) 
+export const Res = (): ParameterDecorator => createParameterDecorator(META_KEYS.RESPONSE) 
+export const Next = (): ParameterDecorator => createParameterDecorator(META_KEYS.NEXT) 
+
+export function Param (parameter: string): ParameterDecorator {
+  return (target, key, index) => {
+    Reflect.defineMetadata(META_KEYS.PARAM, { parameter, index }, target, key)
+  }
+}

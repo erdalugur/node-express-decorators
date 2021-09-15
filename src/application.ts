@@ -16,11 +16,13 @@ export class Application extends AppServer {
   }
   
   listen () {
-    this.app.listen(this.port, () => {
-      loggerService.log(`application listening on http://localholst:${this.port}`)
+    const app = this.create()
+    app.listen(this.port, () => {
+      loggerService.log(`application listening on http://localhost:${this.port}`)
     })
   }
 }
+
 
 process.on('unhandledRejection', error => {
   loggerService.log("unhandledRejection", error)

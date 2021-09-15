@@ -1,4 +1,4 @@
-import { Application } from 'express'
+import * as express from 'express'
 import { HttpMethods } from './http'
 
 export interface RouteDefinition {
@@ -26,11 +26,11 @@ export interface AppModuleOptions {
   port: number
   bodyParserOptions?: BodyParserOptions
 }
-
 export class AppServer { 
   port: number
   routes: Array<RouteItem>
-  app: Application
+  app: express.Application
+  create: () => express.Application
 }
 export interface ContainerProvider {
   useValue: any;

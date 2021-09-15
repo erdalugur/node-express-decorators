@@ -1,27 +1,29 @@
 import { Request, Response } from "express";
 import { Route, Get, Post, Put, Delete, Options } from "../decorators";
+import { UnAuthorizedException } from "../exceptions";
 
 @Route('/')
 export default class Index {
   @Get('/')
-  get (req: Request, res: Response) {
-    res.send('hello get request :))')
+  get (res: Response) {
+    console.log(res.json)
+    throw new UnAuthorizedException()
   }
 
   @Post('/')
-  post (req: Request, res: Response) {
-    res.send('Hello post request :))')
+  post () {
+    return 'Hello post request :))'
   }
   @Put('/')
-  put (req: Request, res: Response) {
-    res.send('Hello put request :))')
+  put () {
+    return 'Hello put request :))'
   }
   @Delete('/')
-  delete (req: Request, res: Response) {
-    res.send('Hello delete request :))')
+  delete () {
+    return 'Hello delete request :))'
   }
   @Options('/')
-  options (req: Request, res: Response) {
-    res.send('Hello options request :))')
+  options () {
+    return 'Hello options request :))'
   }
 }
