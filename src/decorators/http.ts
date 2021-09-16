@@ -44,11 +44,31 @@ function createParameterDecorator (metaKey): ParameterDecorator {
   }
 }
 
-export const Body = (): ParameterDecorator => createParameterDecorator(META_KEYS.BODY) 
-export const Req = (): ParameterDecorator => createParameterDecorator(META_KEYS.REQUEST) 
-export const Res = (): ParameterDecorator => createParameterDecorator(META_KEYS.RESPONSE) 
+/**
+ * @example
+ * testMethod(@Body() test: test)
+ */
+export const Body = (): ParameterDecorator => createParameterDecorator(META_KEYS.BODY)
+/**
+ * @example
+ * testMethod(@Req() req: express.Request)
+ */
+export const Req = (): ParameterDecorator => createParameterDecorator(META_KEYS.REQUEST)
+/**
+ * @example
+ * testMethod(@Res() res: express.Response)
+ */
+export const Res = (): ParameterDecorator => createParameterDecorator(META_KEYS.RESPONSE)
+/**
+ * @example
+ * testMethod(@Next() next: express.NextFunction)
+ */
 export const Next = (): ParameterDecorator => createParameterDecorator(META_KEYS.NEXT) 
 
+/**
+ * @example
+ * testMethod(@Param('id') id: string)
+ */
 export function Param (parameter: string): ParameterDecorator {
   return (target, key, index) => {
     Reflect.defineMetadata(META_KEYS.PARAM, { parameter, index }, target, key)

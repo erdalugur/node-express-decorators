@@ -1,10 +1,9 @@
 import * as express from 'express'
-import { Injector } from './injector';
+import { Injector, getInjectionsPerRequest } from './injector';
 import { META_KEYS } from '../constants';
 import { RouteDefinition, AppModuleOptions } from '../types'
 import { resolveApp, getAllFiles } from '../utils'
 import { errorHandler, logError } from '../middeware';
-import { getInjectionsPerRequest } from './injector';
 
 export function Route (prefix: string = ''): ClassDecorator {
   return (target: Function) => {

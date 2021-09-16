@@ -15,13 +15,11 @@ export default class UserRoute {
 
   @Get('/:id')
   getById(@Param('id') id: number) {
-    console.log(id)
     return this.userService.getById(id)
   }
 
   @Post('/')
   post(@Body() user: UserDto) {
-    console.log(user)
     return this.userService.add(user)
   }
 }

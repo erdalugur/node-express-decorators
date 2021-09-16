@@ -1,13 +1,9 @@
-import { Request, Response } from "express";
 import { Route, Get, Post, Put, Delete, Options } from "../decorators";
-import { UnAuthorizedException } from "../exceptions";
-
 @Route('/')
 export default class Index {
   @Get('/')
-  get (res: Response) {
-    console.log(res.json)
-    throw new UnAuthorizedException()
+  get () {
+    return 'Hello get request :))'
   }
 
   @Post('/')

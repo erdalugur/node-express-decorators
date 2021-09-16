@@ -3,7 +3,7 @@ import { ProductService } from "../services";
 import { ProductDto } from "../types";
 
 @Route('/product')
-export default class UserRoute {
+export default class ProductRoute {
   constructor(
     private productService: ProductService,
     ) {}
