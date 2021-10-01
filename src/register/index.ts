@@ -5,7 +5,7 @@ import { getInjectionsPerRequest, Injector } from '../decorators'
 import { META_KEYS } from '../constants'
 
 
-export function register ({ expressInstance, controllersDir, rootPrefix = '/api' }: { expressInstance: Application, controllersDir: string, rootPrefix?: string}) {
+export function register ({ expressInstance, controllersDir, rootPrefix = '' }: { expressInstance: Application, controllersDir: string, rootPrefix?: string}) {
   const controllers = getAllFiles(controllersDir,[])
   controllers.forEach(c => {
     const obj = require(c.path)
