@@ -1,6 +1,6 @@
 {
   "name": "node-express-decorators",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "an nodejs decorators module",
   "main": "dist/index.js",
   "source": "src/index.ts",
