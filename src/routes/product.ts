@@ -1,8 +1,8 @@
-import { Route, Get, Post, Body, Param } from "../decorators";
+import { Controller, Get, Post, Body, Param } from "node-express-decorators";
 import { ProductService } from "../services";
 import { ProductDto } from "../types";
+@Controller({ prefix: '/product'})
 
-@Route('/product')
 export default class ProductRoute {
   constructor(
     private productService: ProductService,

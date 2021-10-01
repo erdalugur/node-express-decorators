@@ -1,24 +1,24 @@
-import { Route, Get, Post, Put, Delete, Options } from "../decorators";
-@Route('/')
+import { Controller, Get, Post, Put, Delete, Options } from "node-express-decorators";
+@Controller({ prefix: '/'})
 export default class Index {
-  @Get('/')
+  @Get('')
   get () {
     return 'Hello get request :))'
   }
 
-  @Post('/')
+  @Post('')
   post () {
     return 'Hello post request :))'
   }
-  @Put('/')
+  @Put('')
   put () {
     return 'Hello put request :))'
   }
-  @Delete('/')
+  @Delete('')
   delete () {
     return 'Hello delete request :))'
   }
-  @Options('/')
+  @Options('')
   options () {
     return 'Hello options request :))'
   }

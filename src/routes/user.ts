@@ -1,8 +1,8 @@
-import { Route, Get, Param, Post, Body } from "../decorators";
+import { Controller, Get, Param, Post, Body } from "node-express-decorators";
 import { UserService } from "../services";
 import { UserDto } from "../types";
 
-@Route('/user')
+@Controller({ prefix: '/user'})
 export default class UserRoute {
   constructor(
     private userService: UserService
