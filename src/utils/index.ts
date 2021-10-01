@@ -1,7 +1,11 @@
-import * as fs from 'fs'
-import * as path from 'path'
+import fs from 'fs'
+import path from 'path'
+interface FileInfo {
+  name: string
+  path: string
+}
 
-export function getAllFiles(dirPath: string, arrayOfFiles: string []): string[] {
+export function getAllFiles(dirPath: string, arrayOfFiles: FileInfo []): FileInfo[] {
   let files = fs.readdirSync(dirPath)
 
   arrayOfFiles = arrayOfFiles || []
@@ -10,15 +14,9 @@ export function getAllFiles(dirPath: string, arrayOfFiles: string []): string[] 
     if (fs.statSync(dirPath + "/" + file).isDirectory()) {
       arrayOfFiles = getAllFiles(dirPath + "/" + file, arrayOfFiles)
     } else {
-      arrayOfFiles.push(path.join(dirPath, "/", file))
+      arrayOfFiles.push({ path: path.join(dirPath, "/", file), name: file.replace('.ts', '').replace('.js', '').replace('.tsx', '')})
     }
   })
 
   return arrayOfFiles
-}
-
-export const appDirectory = fs.realpathSync(process.cwd())
-
-export function resolveApp (relativePath: string) {
-  return path.join(__dirname, relativePath)
 }

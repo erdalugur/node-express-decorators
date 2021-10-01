@@ -1,9 +1,13 @@
 export const META_KEYS = {
-  ROUTES: Symbol('__ROUTES__'),
-  PREFIX: Symbol('__PREFIX__'),
-  BODY: Symbol('__BODY__'),
-  PARAM: Symbol('__PARAMETER__'),
-  REQUEST: Symbol('__REQUEST__'),
-  RESPONSE: Symbol('__RESPONSE__'),
-  NEXT: Symbol('__NEXT__')
+  ROUTES: 'symbol:routes',
+  PARAM: 'symbol:param',
+  REQUEST: 'symbol:request',
+  RESPONSE: 'symbol:response',
+  NEXT: 'symbol:next',
+  BODY: 'symbol:body',
+  PREFIX: 'symbol:prefix',
+  VIEW_MODULES: 'symbol:view:modules',
+  VIEW_HANDLER: 'symbol:view:handler',
+  VIEW_MODULE: 'symbol:view:module'
 }
+  
