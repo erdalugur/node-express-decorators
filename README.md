@@ -5,6 +5,7 @@
 
 https://www.npmjs.com/package/node-express-decorators
 
+- npm install reflect-metadata
 - npm install node-express-decorators
 
 ## Kullanım
