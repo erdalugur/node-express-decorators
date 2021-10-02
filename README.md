@@ -11,6 +11,7 @@ https://www.npmjs.com/package/node-express-decorators
 ## Kullanım
 
 ```
+import 'reflect-metadata'
 import * as express from 'express'
 import { useController } from 'node-express-decorators'
 import path from 'path'
