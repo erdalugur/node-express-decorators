@@ -1,12 +1,15 @@
-import { Application, Request, Response, NextFunction } from 'express'
+import { Request, Response, NextFunction, Router } from 'express'
 import { getAllFiles } from '../utils'
 import { RouteDefinition,  } from '../types'
 import { getInjectionsPerRequest, Injector } from '../decorators'
 import { META_KEYS } from '../constants'
 
 
-export function register ({ expressInstance, controllersDir, rootPrefix = '' }: { expressInstance: Application, controllersDir: string, rootPrefix?: string}) {
-  const controllers = getAllFiles(controllersDir,[])
+const app = Router()
+
+export function useController (controllerDir: string) {
+  const controllers = getAllFiles(controllerDir,[])
+
   controllers.forEach(c => {
     const obj = require(c.path)
     const controller = obj.default || class {}
@@ -16,8 +19,8 @@ export function register ({ expressInstance, controllersDir, rootPrefix = '' }: 
     const apiRoutes: Array<RouteDefinition> = Reflect.getMetadata(META_KEYS.ROUTES, controller) || []
     apiRoutes.forEach(({ methodName, requestMethod, path }) => {
       const instance = Injector.resolve(controller)
-      const route = `${rootPrefix}${prefix}${path}`
-      expressInstance[requestMethod](route, async (req: Request, res: Response, next: NextFunction) => {
+      const route = `${prefix}${path}`
+      app[requestMethod](route, async (req: Request, res: Response, next: NextFunction) => {
         try {
           const injections = getInjectionsPerRequest({ instance, methodName, req, res, next })
           const result = await instance[methodName](...injections)
@@ -29,5 +32,5 @@ export function register ({ expressInstance, controllersDir, rootPrefix = '' }: 
     })
   })
 
-    return expressInstance
+    return app
 }

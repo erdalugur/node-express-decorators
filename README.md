@@ -11,14 +11,12 @@ https://www.npmjs.com/package/node-express-decorators
 
 ```
 import * as express from 'express'
-import { register } from 'node-express-decorators'
-import * as path from 'path'
+import { useController } from 'node-express-decorators'
+import path from 'path'
 
-let app = register({
-  expressInstance: express(),
-  controllersDir: path.join(__dirname, 'your_dir_name'),
-  rootPrefix: '/api' // opsiyonel root prefix
-})
+const app = express()
+
+app.use(useController(path.join(__dirname, 'routes')))
 
 app.listen(3000, () => {
   console.log('http://localhost:3000')

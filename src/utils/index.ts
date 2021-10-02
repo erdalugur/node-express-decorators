@@ -10,7 +10,7 @@ export function getAllFiles(dirPath: string, arrayOfFiles: FileInfo []): FileInf
 
   arrayOfFiles = arrayOfFiles || []
 
-  files.forEach(function(file) {
+  files.filter(x => !x.includes('.d.ts')).forEach(function(file) {
     if (fs.statSync(dirPath + "/" + file).isDirectory()) {
       arrayOfFiles = getAllFiles(dirPath + "/" + file, arrayOfFiles)
     } else {

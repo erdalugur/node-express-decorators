@@ -846,10 +846,10 @@ negotiator@0.6.2:
   resolved "https://registry.yarnpkg.com/negotiator/-/negotiator-0.6.2.tgz#feacf7ccf525a77ae9634436a64883ffeca346fb"
   integrity sha512-hZXc7K2e+PgeI1eDBe/10Ard4ekbfrrqG8Ep+8Jmf4JID2bNg7NvCPOZN+kfF574pFQI7mum2AUqDidoKqcTOw==
 
-node-express-decorators@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/node-express-decorators/-/node-express-decorators-1.0.4.tgz#2a91673fbd7dd322a60e3beb948727aca9d93782"
-  integrity sha512-52dWE0UFg1JDTBXga1GqQ8Nl9OcHFAVcNS87eRooxqslNSMfU+2UzuZq+9O3VlM0LK1GoZfUjFKEFgTINdOK2Q==
+node-express-decorators@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/node-express-decorators/-/node-express-decorators-1.1.2.tgz#22708c7dcc5b74553d9a7e1298f7345a057419f0"
+  integrity sha512-gLnVUfLyHAiRsp4GvgZF8WYnlAaUYdTgE3EFyQuP4XIbrRQRn9zADDPIYVgD4QPkCk92pOQiULlM/sTm3OtvGA==
   dependencies:
     express "^4.17.1"
     reflect-metadata "^0.1.13"

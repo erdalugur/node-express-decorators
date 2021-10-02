@@ -1,6 +1,6 @@
 {
   "name": "node-express-decorators",
-  "version": "1.0.8",
+  "version": "1.1.2",
   "description": "an nodejs decorators module",
   "main": "dist/index.js",
   "source": "src/index.ts",
@@ -21,7 +21,8 @@
     "typescript": "^4.4.3"
   },
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "publish": "yarn build && npm publish"
   },
   "dependencies": {
     "express": "^4.17.1",

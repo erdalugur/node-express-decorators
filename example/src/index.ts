@@ -1,15 +1,13 @@
 import 'reflect-metadata';
 import { HttpException } from './exceptions';
 import { loggerService } from './services';
-import * as express from 'express'
-import { register } from 'node-express-decorators'
-import * as path from 'path'
+import express from 'express'
+import { useController } from 'node-express-decorators'
+import path from 'path'
 
-let app = register({
-  expressInstance: express(),
-  controllersDir: path.join(__dirname, 'routes'),
-  rootPrefix: ''
-})
+const app = express()
+
+app.use('/api', useController(path.join(__dirname, 'routes')))
 
 app.listen(3000, () => {
   console.log('http://localhost:3000')
